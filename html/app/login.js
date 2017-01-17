@@ -47,10 +47,11 @@ function userService($http, API, auth) {
         return $http.get(API + '/leagues')
     };
 
-    self.register = function(username, password) {
+    self.register = function(email, username, password, confirm_password) {
         return $http.post(API + '/auth/register', {
-            username: username,
-            password: password
+            'email': email,
+            'username': username,
+            'password': password,
         })
     };
 
@@ -90,17 +91,26 @@ function MainCtrl(user, auth) {
         user.login(self.username, self.password)
         .then(handleRequest, handleRequest)
     }
+
     self.register = function() {
-        user.register(self.username, self.password)
+        if(self.password != self.confirmPassword) {
+            self.signupmessage = "Your passwords do not match";
+            return false;
+        }
+        
+        user.register(self.email, self.username, self.password, self.confirm_password)
         .then(handleRequest, handleRequest)
     }
+
     self.getQuote = function() {
         user.getQuote()
         .then(handleRequest, handleRequest)
     }
+
     self.logout = function() {
         auth.logout && auth.logout()
     }
+
     self.isAuthed = function() {
         return auth.isAuthed ? auth.isAuthed() : false
     }
