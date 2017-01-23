@@ -17,8 +17,8 @@
           controller: 'PlayersCtrl',
           title: 'Players',
           sidebarMeta: {
-            icon: 'ion-grid',
-            order: 300,
+            icon: 'ion-person',
+            order: 200,
           },
         });
   }

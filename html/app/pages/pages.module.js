@@ -7,13 +7,15 @@
 
   angular.module('StrayAdmin.pages', [
     'ui.router',
-    'StrayAdmin.pages.players'
+    'StrayAdmin.pages.home',
+    'StrayAdmin.pages.players',
+    'StrayAdmin.pages.teams'
   ])
       .config(routeConfig);
 
   /** @ngInject */
   function routeConfig($urlRouterProvider, baSidebarServiceProvider) {
-    $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise('/home');
 
     baSidebarServiceProvider.addStaticItem({
       title: 'Sign Out',
